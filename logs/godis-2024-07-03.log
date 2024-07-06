@@ -1,0 +1,28 @@
+[INFO][server.go:34] 2024/07/03 09:26:26 start listen, address: 127.0.0.1:3000
+[INFO][server.go:57] 2024/07/03 09:26:32 accepted link
+[INFO][handler.go:52] 2024/07/03 09:26:32 connection closed: 127.0.0.1:49254
+[INFO][server.go:57] 2024/07/03 09:26:37 accepted link
+[INFO][handler.go:52] 2024/07/03 09:26:37 connection closed: 127.0.0.1:49288
+[INFO][server.go:57] 2024/07/03 09:26:43 accepted link
+[INFO][handler.go:52] 2024/07/03 09:26:43 connection closed: 127.0.0.1:49321
+[INFO][server.go:42] 2024/07/03 09:27:50 shutting down
+[INFO][handler.go:82] 2024/07/03 09:27:50 handler shutting down
+[INFO][server.go:39] 2024/07/03 09:29:11 bind: 127.0.0.1:3000, start listening...
+[INFO][server.go:68] 2024/07/03 09:29:14 accept link
+[INFO][handler.go:52] 2024/07/03 09:29:56 connection closed: 127.0.0.1:50101
+[INFO][server.go:49] 2024/07/03 09:29:56 shutting down...
+[INFO][handler.go:82] 2024/07/03 09:29:56 handler shutting down
+[INFO][server.go:34] 2024/07/03 09:34:12 start listen, address: 127.0.0.1:3000
+[INFO][server.go:57] 2024/07/03 09:34:22 accepted link
+[INFO][handler.go:52] 2024/07/03 09:48:10 connection closed: 127.0.0.1:51605
+[INFO][server.go:42] 2024/07/03 09:48:10 shutting down
+[INFO][handler.go:82] 2024/07/03 09:48:10 handler shutting down
+[INFO][server.go:34] 2024/07/03 23:20:07 start listen, address: 127.0.0.1:3000
+[INFO][server.go:57] 2024/07/03 23:20:42 accepted link
+[INFO][handler.go:52] 2024/07/03 23:20:42 connection closed: 127.0.0.1:50400
+[INFO][server.go:57] 2024/07/03 23:20:49 accepted link
+[INFO][handler.go:52] 2024/07/03 23:20:49 connection closed: 127.0.0.1:50429
+[INFO][server.go:57] 2024/07/03 23:21:54 accepted link
+[INFO][handler.go:52] 2024/07/03 23:21:54 connection closed: 127.0.0.1:50676
+[INFO][server.go:42] 2024/07/04 09:12:19 shutting down
+[INFO][handler.go:82] 2024/07/04 09:12:19 handler shutting down
