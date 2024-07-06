@@ -1,2 +1,4 @@
 redis
 .idea
+logs
+appendonly.aof
