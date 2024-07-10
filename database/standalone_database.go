@@ -20,7 +20,9 @@ func NewStandaloneDatabase() *StandaloneDatabase {
 	if config.Properties.Databases == 0 {
 		config.Properties.Databases = 16
 	}
+	// 初始化 16 个数据库
 	database.dbSet = make([]*DB, config.Properties.Databases)
+	// 初始化每一个数据库
 	for i := range database.dbSet {
 		db := makeDB()
 		db.index = i
@@ -43,20 +45,26 @@ func NewStandaloneDatabase() *StandaloneDatabase {
 }
 
 func (database *StandaloneDatabase) Exec(client resp.Connection, args [][]byte) resp.Reply {
+	// 用来 recover panic
 	defer func() {
 		if err := recover(); err != nil {
 			logger.Error(err)
 		}
 	}()
+	// 拿到第一个参数，也就是指令的名字
 	cmdName := strings.ToLower(string(args[0]))
+	// 如果指令是 select，切换数据库
 	if cmdName == "select" {
 		if len(args) != 2 {
 			return reply.MakeArgNumErrReply("select")
 		}
 		execSelect(client, database, args[1:])
 	}
+	// 从 client 中拿到 dbIndex
 	dbIndex := client.GetDBIndex()
+	// 通过 dbIndex 拿到 db
 	db := database.dbSet[dbIndex]
+	// 执行指令
 	return db.Exec(client, args)
 }
 
@@ -68,13 +76,18 @@ func (database *StandaloneDatabase) AfterClientClose(c resp.Connection) {
 
 // select 2
 func execSelect(c resp.Connection, database *StandaloneDatabase, args [][]byte) resp.Reply {
+	// 从用户输入的命令中拿到 dbIndex
 	dbIndex, err := strconv.Atoi(string(args[0]))
+	// 如果 dbIndex 不是数字，返回错误
 	if err != nil {
 		return reply.MakeErrReply("ERR invalid DB index")
 	}
+	// 如果 dbIndex 超出了数据库的范围，返回错误
 	if dbIndex >= len(database.dbSet) {
 		return reply.MakeErrReply("ERR db index is out of range")
 	}
+	// 设置 dbIndex
 	c.SelectDB(dbIndex)
+	// 返回 OK
 	return reply.MakeOkReply()
 }
