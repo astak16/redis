@@ -12,7 +12,7 @@ import (
 
 type StandaloneDatabase struct {
 	dbSet      []*DB
-	aofHandler *aof.AofHandler
+	aofHandler *aof.AofHandler // 增加落盘功能
 }
 
 func NewStandaloneDatabase() *StandaloneDatabase {
@@ -28,14 +28,21 @@ func NewStandaloneDatabase() *StandaloneDatabase {
 		db.index = i
 		database.dbSet[i] = db
 	}
+	// 先看下配置文件中的 appendonly 是否为 true
 	if config.Properties.AppendOnly {
+		// 初始化 aofHandler
 		aofHandler, err := aof.NewAofHandler(database)
 		if err != nil {
 			panic(err)
 		}
+		// 持有 aofHandler
 		database.aofHandler = aofHandler
+		// 遍历 dbSet
 		for _, db := range database.dbSet {
+			// 解决闭包问题
 			sdb := db
+			// 为每个 db 添加 AddAof 方法
+			// 这个 addAof 方法是在执行指令的时候调用的
 			sdb.addAof = func(line CmdLine) {
 				database.aofHandler.AddAof(sdb.index, line)
 			}

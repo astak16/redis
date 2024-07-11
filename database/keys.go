@@ -15,6 +15,7 @@ func DEL(db *DB, args [][]byte) resp.Reply {
 		keys[i] = string(v)
 	}
 	deleted := db.Removes(keys...)
+	// delete 大于 0 说明有数据被删除
 	if deleted > 0 {
 		db.addAof(utils.ToCmdLine2("DEL", args...))
 	}

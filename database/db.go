@@ -9,9 +9,9 @@ import (
 )
 
 type DB struct {
-	index  int       // 数据的编号
-	data   dict.Dict // 数据类型
-	addAof func(CmdLine)
+	index  int           // 数据的编号
+	data   dict.Dict     // 数据类型
+	addAof func(CmdLine) // 每个 db 都有一个 addAof 方法
 }
 
 type ExecFunc func(db *DB, args [][]byte) resp.Reply
