@@ -12,11 +12,14 @@ type connectionFactory struct {
 }
 
 func (f connectionFactory) MakeObject(ctx context.Context) (*pool.PooledObject, error) {
+	// 初始化 tcp 客户端
 	c, err := client.MakeClient(f.Peer)
 	if err != nil {
 		return nil, err
 	}
+	// 启动 tcp 客户端
 	c.Start()
+	// 返回连接池
 	return pool.NewPooledObject(c), nil
 }
 
@@ -25,6 +28,7 @@ func (f connectionFactory) DestroyObject(ctx context.Context, object *pool.Poole
 	if !ok {
 		return errors.New("type mismatch")
 	}
+	// 关闭 tcp 客户端
 	c.Close()
 	return nil
 }
